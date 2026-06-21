@@ -27,17 +27,17 @@ export default function App() {
   // --- Real-time MongoDB Synchronization Stream ---
   useEffect(() => {
     if (user) {
-      fetch("http://localhost:5000/api/courses")
+      fetch("https://capstone-mern-project-backend.onrender.com/api/courses")
         .then(res => res.json())
         .then(data => setCourses(Array.isArray(data) ? data : []))
         .catch(err => console.error("Error connecting to MongoDB courses:", err));
 
-      fetch("http://localhost:5000/api/assignments")
+      fetch("https://capstone-mern-project-backend.onrender.com/api/assignments")
         .then(res => res.json())
         .then(data => setAssignments(Array.isArray(data) ? data : []))
         .catch(err => console.error("Error connecting to MongoDB assignments:", err));
 
-      fetch("http://localhost:5000/api/jobs")
+      fetch("https://capstone-mern-project-backend.onrender.com/api/jobs")
         .then(res => res.json())
         .then(data => setJobs(Array.isArray(data) ? data : []))
         .catch(err => console.error("Error connecting to MongoDB jobs:", err));
@@ -48,7 +48,7 @@ export default function App() {
   const handleEnrollCourse = (id, studentData) => {
     if (!user && !studentData) return;
     const payload = studentData ? studentData : { studentName: user.name };
-    fetch(`http://localhost:5000/api/courses/${id}/enroll`, {
+    fetch(`https://capstone-mern-project-backend.onrender.com/api/courses/${id}/enroll`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -59,7 +59,7 @@ export default function App() {
   };
 
   const handleCreateCourse = (courseData) => {
-    fetch("http://localhost:5000/api/courses", {
+    fetch("https://capstone-mern-project-backend.onrender.com/api/courses", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(courseData)
@@ -70,7 +70,7 @@ export default function App() {
   };
 
   const handleCreateAssignment = (asgData) => {
-    fetch("http://localhost:5000/api/assignments", {
+    fetch("https://capstone-mern-project-backend.onrender.com/api/assignments", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(asgData)
@@ -82,7 +82,7 @@ export default function App() {
 
   const handleSubmitAssignment = (id, link) => {
     if (!user?.name) return;
-    fetch(`http://localhost:5000/api/assignments/${id}/submit`, {
+    fetch(`https://capstone-mern-project-backend.onrender.com/api/assignments/${id}/submit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentName: user.name, link })
@@ -93,7 +93,7 @@ export default function App() {
   };
 
   const handleGradeAssignment = (id, studentName, grade) => {
-    fetch(`http://localhost:5000/api/assignments/${id}/grade`, {
+    fetch(`https://capstone-mern-project-backend.onrender.com/api/assignments/${id}/grade`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentName, grade })
@@ -104,7 +104,7 @@ export default function App() {
   };
 
   const handlePostJob = (jobData) => {
-    fetch("http://localhost:5000/api/jobs", {
+    fetch("https://capstone-mern-project-backend.onrender.com/api/jobs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(jobData)
@@ -124,7 +124,7 @@ export default function App() {
       resume: applicantData?.resume || ""
     };
 
-    fetch(`http://localhost:5000/api/jobs/${id}/apply`, {
+    fetch(`https://capstone-mern-project-backend.onrender.com/api/jobs/${id}/apply`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload)
@@ -138,7 +138,7 @@ export default function App() {
   };
 
   const handleUpdateJobStatus = (id, studentName, status) => {
-    fetch(`http://localhost:5000/api/jobs/${id}/status`, {
+    fetch(`https://capstone-mern-project-backend.onrender.com/api/jobs/${id}/status`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ studentName, status })
